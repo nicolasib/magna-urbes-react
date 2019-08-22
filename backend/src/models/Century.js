@@ -3,14 +3,12 @@ const mongoose = require('../database/index');
 const CenturySchema = new mongoose.Schema({
     number: {
         type: String,
-        require: true,
-        unique: true
+        require: true
     },
     country: {
         name: {
             type: String,
-            require: true,
-            unique: true
+            require: true
         },
         cities: []
     }
