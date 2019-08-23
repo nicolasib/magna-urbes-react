@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import GlobalStyle from '../../styles/global';
-import Header from './components/Header';
+import Header from '../global/Header';
 import FormBody from './components/FormBody';
 
 const register = () => {
+
+    useEffect(()=>{
+
+    }, []);
+
     return (
         <>
             <Header />
             <FormBody />
-            <GlobalStyle />
         </>
     );
-};
+}
 
 export default register;

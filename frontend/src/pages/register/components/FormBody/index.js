@@ -114,12 +114,12 @@ export default class FormBody extends Component {
             }
         };
 
-        Axios.post('http://localhost:8000/admin/register', req)
+        Axios.post('http://localhost:8000/admin/registerCentury', req)
             .then(res => {
-                console.log(res);
+                window.alert(`Inserido com sucesso!`);
             })
             .catch(error => {
-                console.log(error);
+                window.alert(`Deu erro.`);
             });
     }
 

@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import { Link }  from 'react-router-dom';
 
-export default function MainSection() {
+export default function MainSection({history}) {
   return (
     <Container>
         <h1>MagnaUrbes</h1>
@@ -16,7 +16,7 @@ export default function MainSection() {
           <Link to="/register">
             <button>Veja mais</button>
           </Link>
-          <Link to="/">
+          <Link to="/adminLogin">
             <button>Login</button>
           </Link>
         </div>
