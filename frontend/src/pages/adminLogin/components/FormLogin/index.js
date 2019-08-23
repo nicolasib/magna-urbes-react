@@ -34,7 +34,7 @@ export default class FormLogin extends Component {
         api.post('admin/loginAdmin', {user, pass}).then(res => {
             if(!res.data.error){
                 const id = res.data._id;
-                this.props.history.push(`/register?id=${id}`);
+                this.props.history.push(`/register?id=${id}&user=${res.data.username}`);
             }else{
                 this.setState({errorText: 'Erro! Tente novamente!'});
             }
