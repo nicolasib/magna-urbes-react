@@ -12,8 +12,10 @@ routes.post('/admin/loginAdmin', userController.index);
 
 // Century controller
 routes.post('/admin/registerCentury', centuryController.store);
+routes.post('/admin/consultCentury', centuryController.index);
 
 // Validate controller
 routes.post('/admin/validateUser', validateController.index);
+
 
 module.exports = routes;

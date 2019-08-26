@@ -39,7 +39,7 @@ export default function Register ({ history }) {
     return (
         <>
             <Header/>
-            <FormBody/>
+            <FormBody history={ history }/>
         </>
     );
 }

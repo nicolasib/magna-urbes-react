@@ -66,6 +66,13 @@ export const Container = styled.div`
             font-size: 18px !important;
             text-align: center;
         }
+        div{
+            width: 100%;
+            justify-content: center;
+            a > button{
+                margin: 20px 4px 10px 4px;
+            }
+        }
     }
 
     h3{

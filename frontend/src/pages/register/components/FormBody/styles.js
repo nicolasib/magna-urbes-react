@@ -14,7 +14,7 @@ export const Container = styled.div`
         input {
             cursor: text;
             padding: 6px;
-            margin: 0 0 4px 0;
+            margin: 0 4px 10px 4px;
             border-top-left-radius: 10px;
             border-bottom-right-radius: 10px;
             border: 2px solid #ddd;
@@ -42,7 +42,7 @@ export const Container = styled.div`
             border-top-left-radius: 10px;
             border-bottom-right-radius: 10px;
             color: #666;
-            font-weight: 600;
+            font-weight: 400;
             font-size: 16px;
             margin: 4px 0;
             cursor: pointer;

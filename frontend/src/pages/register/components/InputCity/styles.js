@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    position: relative;
+    
+    display: flex;
+
     input {
         padding: 6px;
         margin: 0 0 4px 0;
@@ -15,12 +17,5 @@ export const Container = styled.div`
     }
     input:focus {
         border: 2px solid #e8c52a;
-    }
-    svg {
-        position: absolute;
-        right: -20%;
-        top: 50%;
-        cursor: pointer;
-        transform: translate(-50%, -50%);
     }
 `;

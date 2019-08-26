@@ -10,7 +10,19 @@ const CenturySchema = new mongoose.Schema({
             type: String,
             require: true
         },
-        cities: []
+        cities: [
+            {
+                name: {
+                    type: String,
+                    require: true
+                },
+                population: {
+                    type: String,
+                    require: true
+
+                }
+            }
+        ]
     }
 });
 
