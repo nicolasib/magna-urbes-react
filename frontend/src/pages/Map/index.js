@@ -2,10 +2,161 @@ import React, { Component } from 'react';
 
 import { Container } from './styles';
 
+import api from '../../services/api';
+
+import { MdClose } from 'react-icons/md';
+
 export default class Map extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      currentCentury: '',
+      currentCountry: {},
+
+      centuryList: [],
+      countryList: []
+    }
+  }
+
+  async listCenturies(){
+    const centuriesVector = await api.post('admin/consultCentury', { query: 'onlyNumber' });
+
+    this.setState({ centuryList: centuriesVector.data });
+    this.setState({ currentCentury: this.state.centuryList[0] });
+  }
+  async componentDidMount(){
+    await this.listCenturies();
+
+    api.post('admin/consultCentury', { query: 'all', value: this.state.currentCentury }).then(res => {
+      const allRegisters = res.data;
+      const countries = [];
+
+      allRegisters.forEach(element => {
+        countries.push(element.country);
+      });
+      return countries;
+    }).then(countries => {
+      this.setState({ countryList: countries });
+
+      this.state.countryList.forEach(element => {
+        let countryElement = document.querySelectorAll(`#${element.name}`);
+      
+        if(countryElement.length > 0){
+          countryElement[0].classList.add("haveContent");
+          
+          countryElement[0].addEventListener('click', this.handleCountry.bind(this));
+        }else{
+          let activeCountries = document.querySelectorAll(".haveContent");
+      
+          if(activeCountries.length > 0){
+            this.clear();            
+          }
+        }
+      });
+    });
+  }
+
+  handleCountry(e){
+    const countryName = e.target.id;
+    const currentCountryObj = this.state.countryList.find(element => {
+      return ( element.name === countryName );
+    });
+    const modal = document.getElementById('modal');
+
+    console.log(window.scrollY);
+
+    this.setState({ currentCountry: currentCountryObj});
+
+    modal.classList.add('modalActive');
+    document.querySelector('body').style.overflowY = `hidden`;
+    
+  }
+
+  clear(){
+    // Removendo as classes ativas e removendo eventos de click
+    // O clone serve pra retirar os eventos de click
+    let clear = document.querySelectorAll(".haveContent");
+    clear.forEach(element => {
+      element.classList.remove("haveContent");
+      let clone = element.cloneNode(true);
+      element.parentNode.replaceChild(clone, element);
+    });
+  }
+  
+  async handleChangeCentury(event){
+    const selectedCentury = event.target.value;
+    await this.setState({ currentCentury: selectedCentury });
+
+    api.post('admin/consultCentury', { query: 'all', value: this.state.currentCentury }).then(res => {
+      const allRegisters = res.data;
+      const countries = [];
+
+      allRegisters.forEach(element => {
+        countries.push(element.country);
+      });
+
+      return countries;
+
+    }).then(countries => {
+      this.setState({ countryList: countries });
+      this.clear();
+
+      this.state.countryList.forEach(element => {
+        let countryElement = document.querySelectorAll(`#${element.name}`);
+
+        if(countryElement.length > 0){
+          countryElement[0].classList.add("haveContent");
+          countryElement[0].addEventListener('click', this.handleCountry.bind(this));
+        }else{
+          let activeCountries = document.querySelectorAll(".haveContent");
+          if(activeCountries.length > 0){
+            this.clear();
+          }
+        }
+      });
+    });
+  }
+
+  closeModal(){
+    const modal = document.getElementById('modal');
+    modal.classList.remove('modalActive')
+    document.querySelector('body').style.overflowY = "scroll";
+  }
+
   render() {
     return (
-      <Container>
+      <Container window={window.innerHeight} scrollOffset={window.scrollY}>
+        <nav>
+          <span>Selecione seu século: </span>
+          <select onChange={ this.handleChangeCentury.bind(this) }>
+            {
+              this.state.centuryList.map((element, index) => {
+                return (
+                  <option key={ index } value={ element }>{ element }</option>
+                );
+              })
+            }
+          </select>
+        </nav>
+        <div id="modal">
+          <div className="modalCard">
+            <MdClose className="closeBtn" onClick={ this.closeModal } />
+            <h1>{ this.state.currentCountry.name }</h1>
+            <ul>
+              { this.state.currentCountry.cities 
+                && this.state.currentCountry.cities.map((element, index) => {
+                  return(
+                    <li key={index}>
+                      <strong>{ element.name }</strong>
+                      <span>{ element.population }</span>
+                    </li>
+                  )
+                }) }
+            </ul>
+          </div>
+        </div>
         <section>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 978.18 695.75">
             <g id="Paises">
