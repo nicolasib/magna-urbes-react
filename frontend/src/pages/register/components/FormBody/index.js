@@ -4,8 +4,6 @@ import { Container } from './styles';
 
 import  api from '../../../../services/api';
 
-import InputCity from '../InputCity';
-
 export default class FormBody extends Component {
     constructor(props) {
         super(props);
@@ -38,27 +36,21 @@ export default class FormBody extends Component {
 
         const auxVector = this.state.citiesData;
 
-        auxVector.push(object);
+        auxVector.push( object );
 
-        this.setState({ citiesData: auxVector });
+        if(name !== '' && population !== undefined){
+            this.setState({ citiesData: auxVector });
+        }
     }
 
     handleCity(event){
         const inputValue = event.target.value;
         this.setState({ name: inputValue });
-
-        if(this.state.name !== '' && this.state.population !== undefined && this.state.population > 0){
-            this.pushVector();
-        }
     }
 
     handlePopulation(event){
         const inputValue = event.target.value;
         this.setState({ population: inputValue });
-
-        if(this.state.name !== '' && this.state.population !== undefined && this.state.population > 0){
-            this.pushVector();
-        }
     }
 
     handleSubmit(event){
@@ -113,15 +105,46 @@ export default class FormBody extends Component {
                             type="text"
                             placeholder={`Nome da cidade`}
                             name={`City1`}
-                            value={this.state.name}
                             onChange={this.handleCity.bind(this)}
                         />
                         <input
                             type="number"
                             placeholder="População"
                             name={`Pop1`}
-                            value={this.state.population}
-                            onKeyUp={() => { setInterval(this.handlePopulation.bind(this), 1500 )}}
+                            onChange={this.handlePopulation.bind(this)}
+                            onBlur={this.pushVector.bind(this)}
+                            
+                        />
+                    </div>
+                    <div>
+                        <input 
+                            type="text"
+                            placeholder={`Nome da cidade`}
+                            name={`City2`}
+                            onChange={this.handleCity.bind(this)}
+                        />
+                        <input
+                            type="number"
+                            placeholder="População"
+                            name={`Pop2`}
+                            onChange={this.handlePopulation.bind(this)}
+                            onBlur={this.pushVector.bind(this)}
+                        />
+                    </div>
+                    <div>
+                        <input 
+                            type="text"
+                            placeholder={`Nome da cidade`}
+                            name={`City3`}
+                            onChange={this.handleCity.bind(this)}
+                        />
+                        <input
+                            type="number"
+                            placeholder="População"
+                            name={`Pop3`}
+                            onChange={this.handlePopulation.bind(this)}
+                            onBlur={this.pushVector.bind(this)}
+                            
                         />
                     </div>
                     <button onClick={this.handleSubmit.bind(this)}>Adicionar</button>

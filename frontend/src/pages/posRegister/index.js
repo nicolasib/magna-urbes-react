@@ -31,13 +31,23 @@ const PosRegister = () => {
                     <th>Século</th>
                     <th>País</th>
                     <th>Cidades</th>
+                    <th>População</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>{bdData.number}</td>
                     <td>{country.name}</td>
-                    <td>{console.log(country)}</td>
+                    <td>{country.cities && country.cities.map((value, index) => {
+                        return (
+                            <div key={index}> { value.name } </div>
+                        )
+                    })}</td>
+                    <td>{country.cities && country.cities.map((value, index) => {
+                        return (
+                            <div key={index}> { value.population } </div>
+                        )
+                    })}</td>
                 </tr>
             </tbody>
         </table>

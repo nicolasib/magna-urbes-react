@@ -11,6 +11,29 @@ export const Container = styled.div`
     flex-direction: column;
     padding: 0 20px;
 
+    button{
+        z-index: 99;
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        width: 100px;
+        border: 2px solid #fff;
+        animation-name: fadeDown;
+        animation-duration: 2s;
+        margin: 20px 0 0 0;
+        background: transparent;
+        transition: ease-in-out;
+        cursor: pointer;
+        &:hover{
+            background-color: #fff;
+            color: #000;
+            transition-duration: 300ms;
+        }
+    }
+
     div{
         display: flex;
         width: 220px;
@@ -58,6 +81,8 @@ export const Container = styled.div`
     }
 
     @media (max-width: 400px) {
+        justify-content: center;
+        align-items: center;
         h1{
             font-size: 40px;
             text-align: center;
