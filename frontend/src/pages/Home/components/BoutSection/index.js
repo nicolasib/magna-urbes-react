@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Container } from './styles';
 
+import { Link } from 'react-router-dom';
+
 import Card from './components/Card';
 
 export default class BoutSection extends Component {
@@ -19,6 +21,7 @@ export default class BoutSection extends Component {
           <Card name={`churras`}/>
           <Card name={`yuri`}/>
         </div>
+        <Link to="/map">Acessar o mapa</Link>
       </Container>
     );
   }

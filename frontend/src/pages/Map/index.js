@@ -29,6 +29,8 @@ export default class Map extends Component {
   async componentDidMount(){
     await this.listCenturies();
 
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
     api.post('admin/consultCentury', { query: 'all', value: this.state.currentCentury }).then(res => {
       const allRegisters = res.data;
       const countries = [];
@@ -67,7 +69,7 @@ export default class Map extends Component {
 
     console.log(window.scrollY);
 
-    this.setState({ currentCountry: currentCountryObj});
+    this.setState({ currentCountry: currentCountryObj });
 
     modal.classList.add('modalActive');
     document.querySelector('body').style.overflowY = `hidden`;
@@ -127,7 +129,7 @@ export default class Map extends Component {
 
   render() {
     return (
-      <Container window={window.innerHeight} scrollOffset={window.scrollY}>
+      <Container window={ window.innerHeight } scrollOffset={ window.scrollY }>
         <nav>
           <span>Selecione seu século: </span>
           <select onChange={ this.handleChangeCentury.bind(this) }>
@@ -143,14 +145,15 @@ export default class Map extends Component {
         <div id="modal">
           <div className="modalCard">
             <MdClose className="closeBtn" onClick={ this.closeModal } />
-            <h1>{ this.state.currentCountry.name }</h1>
+            <h1>{ `Cidades em ${this.state.currentCountry.name}` }</h1>
+            <h2>{ `No século ${this.state.currentCentury}` }</h2>
             <ul>
               { this.state.currentCountry.cities 
                 && this.state.currentCountry.cities.map((element, index) => {
                   return(
                     <li key={index}>
-                      <strong>{ element.name }</strong>
-                      <span>{ element.population }</span>
+                      <p><b>{ element.name }</b></p>
+                      <span>{ `População: ${element.population}` }</span>
                     </li>
                   )
                 }) }

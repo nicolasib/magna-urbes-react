@@ -45,7 +45,7 @@ export default class FormBody extends Component {
 
     handleCity(event){
         const inputValue = event.target.value;
-        this.setState({ name: inputValue });
+        if(inputValue !== '') this.setState({ name: inputValue });
     }
 
     handlePopulation(event){
