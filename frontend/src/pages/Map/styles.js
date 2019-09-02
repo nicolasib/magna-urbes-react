@@ -114,9 +114,15 @@ export const Container = styled.div`
       display: flex;
       li{
         padding: 20px;
-        box-shadow: 0 0 4px #2223;
+        box-shadow: -1px 2px 3px #2223;
         border-radius: 5px;
         margin: 20px 20px 20px 0;
+        transition: ease-in-out;
+        transition-duration: 300ms;
+        cursor: default;
+        &:hover{
+          box-shadow: -1px 2px 3px #2225;
+        }
       }
     }
     h1{
