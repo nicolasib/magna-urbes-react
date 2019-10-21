@@ -13,8 +13,8 @@ export default class MainSection extends Component {
       <Container>
         <h1>MagnaUrbes</h1>
         <h3>
-            Id incididunt laboris cillum dolor aliqua 
-            cupidatat eiusmod ipsum elit do.
+          Descubra as cidades com maior destaque e 
+          suas crescentes evoluções com o passar do tempo!
         </h3>
         <button onClick={ this.handleClick.bind(this) }>Ver mais</button>
 

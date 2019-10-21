@@ -38,4 +38,15 @@ export const Container = styled.div`
         }
 
     }
+    .gotoMap{
+        text-decoration: none;
+        background-color: #f5f5f5;
+        width: max-content;
+        padding: 8px 13px;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        font-weight: 500;
+        color: #333;
+        align-self: center;
+    }
 `;
